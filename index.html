@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
+        .container { max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input { width: 100%; padding: 10px; margin: 5px 0; }
+        button { width: 100%; padding: 10px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p>Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+    </div>
+    
+    <div class="container" id="register" style="display: none;">
+        <h2>Register</h2>
+        <input type="text" id="newUsername" placeholder="Username">
+        <input type="password" id="newPassword" placeholder="Password">
+        <button onclick="register()">Register</button>
+        <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+    </div>
 
+    <script>
+        function showRegister() {
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('register').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.querySelector('.container').style.display = 'block';
+            document.getElementById('register').style.display = 'none';
+        }
+
+        function register() {
+            let username = document.getElementById("newUsername").value;
+            let password = document.getElementById("newPassword").value;
+            if (localStorage.getItem(username)) {
+                alert("Username already exists!");
+            } else {
+                localStorage.setItem(username, password);
+                alert("Registration successful!");
+                showLogin();
+            }
+        }
+
+        function login() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let storedPassword = localStorage.getItem(username);
+            if (storedPassword && storedPassword === password) {
+                alert("Login successful!");
+            } else {
+                alert("Invalid username or password!");
+            }
+        }
+    </script>
+</body>
+</html>
