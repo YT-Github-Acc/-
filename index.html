@@ -5,14 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
-        .container { max-width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
-        input { width: 100%; padding: 10px; margin: 5px 0; }
-        button { width: 100%; padding: 10px; margin-top: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="loginContainer">
         <h2>Login</h2>
         <input type="text" id="username" placeholder="Username">
         <input type="password" id="password" placeholder="Password">
@@ -20,7 +58,7 @@
         <p>Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
     </div>
     
-    <div class="container" id="register" style="display: none;">
+    <div class="container" id="registerContainer" style="display: none;">
         <h2>Register</h2>
         <input type="text" id="newUsername" placeholder="Username">
         <input type="password" id="newPassword" placeholder="Password">
@@ -30,13 +68,13 @@
 
     <script>
         function showRegister() {
-            document.querySelector('.container').style.display = 'none';
-            document.getElementById('register').style.display = 'block';
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('registerContainer').style.display = 'block';
         }
 
         function showLogin() {
-            document.querySelector('.container').style.display = 'block';
-            document.getElementById('register').style.display = 'none';
+            document.getElementById('loginContainer').style.display = 'block';
+            document.getElementById('registerContainer').style.display = 'none';
         }
 
         function register() {
@@ -57,6 +95,7 @@
             let storedPassword = localStorage.getItem(username);
             if (storedPassword && storedPassword === password) {
                 alert("Login successful!");
+                window.location.href = "main.html";
             } else {
                 alert("Invalid username or password!");
             }
